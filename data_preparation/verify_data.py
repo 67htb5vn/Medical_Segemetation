@@ -16,14 +16,8 @@ def check_image_and_mask(cfg, mode):
     """
     Check and print names of those images whose mask are not found.
     """
-    images_path = join_paths(
-        cfg.WORK_DIR,
-        cfg.DATASET[mode].IMAGES_PATH
-    )
-    mask_path = join_paths(
-        cfg.WORK_DIR,
-        cfg.DATASET[mode].MASK_PATH
-    )
+    images_path = cfg.DATASET[mode].IMAGES_PATH
+    mask_path   = cfg.DATASET[mode].MASK_PATH
 
     all_images = os.listdir(images_path)
 
