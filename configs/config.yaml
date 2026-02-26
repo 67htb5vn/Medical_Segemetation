@@ -14,14 +14,23 @@ DATA_PREPARATION:
   SCAN_MIN_VALUE: -200
   SCAN_MAX_VALUE: 250
 
+# DATASET:
+#   # paths should be relative from project root path
+#   TRAIN:
+#     IMAGES_PATH: "/data/train/images"
+#     MASK_PATH: "/data/train/mask"
+#   VAL:
+#     IMAGES_PATH: "/data/val/images"
+#     MASK_PATH: "/data/val/mask"
+
 DATASET:
   # paths should be relative from project root path
   TRAIN:
-    IMAGES_PATH: "/data/train/images"
-    MASK_PATH: "/data/train/mask"
+    IMAGES_PATH: "kaggle/input/medicalGit/train/images"
+    MASK_PATH: "kaggle/input/medicalGit/train/mask"
   VAL:
-    IMAGES_PATH: "/data/val/images"
-    MASK_PATH: "/data/val/mask"
+    IMAGES_PATH: "kaggle/input/medicalGit/val/images"
+    MASK_PATH: "kaggle/input/medicalGit/val/mask"
 
 
 MODEL:
