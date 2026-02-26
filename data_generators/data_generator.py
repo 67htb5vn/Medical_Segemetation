@@ -6,6 +6,7 @@ import tensorflow as tf
 from omegaconf import DictConfig
 
 from utils.general_utils import join_paths, get_gpus_count
+from utils.general_utils import resolve_path
 from .tf_data_generator import DataGenerator as tf_data_generator
 
 try:
@@ -65,14 +66,20 @@ def get_iterations(cfg: DictConfig, mode: str):
     """
     Return steps per epoch
     """
-    images_length = len(
-        os.listdir(
-            join_paths(
-                cfg.WORK_DIR,
-                cfg.DATASET[mode].IMAGES_PATH
-            )
-        )
+    # images_length = len(
+    #     os.listdir(
+    #         join_paths(
+    #             cfg.WORK_DIR,
+    #             cfg.DATASET[mode].IMAGES_PATH
+    #         )
+    #     )
+    # )
+    images_dir = resolve_path(
+        cfg.WORK_DIR,
+        cfg.DATASET[mode].IMAGES_PATH
     )
+
+    images_length = len(os.listdir(images_dir))
 
     if cfg.DATA_GENERATOR_TYPE == "TF_GENERATOR":
         training_steps = images_length // cfg.HYPER_PARAMETERS.BATCH_SIZE
