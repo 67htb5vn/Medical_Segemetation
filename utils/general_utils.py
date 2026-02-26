@@ -21,6 +21,10 @@ def join_paths(*paths):
     """
     return os.path.normpath(os.path.sep.join(path.rstrip(r"\/") for path in paths))
 
+def resolve_path(work_dir, path):
+    if os.path.isabs(path):
+        return path
+    return join_paths(work_dir, path)
 
 def set_gpus(gpu_ids):
     """
@@ -55,7 +59,7 @@ def get_gpus_count():
     return len(tf.config.experimental.list_logical_devices('GPU'))
 
 
-def get_data_paths(cfg: DictConfig, mode: str, mask_available: bool):
+# def get_data_paths(cfg: DictConfig, mode: str, mask_available: bool):
     """
     Return list of absolute images/mask paths.
     There are two options you can either pass directory path or list.
@@ -109,6 +113,46 @@ def get_data_paths(cfg: DictConfig, mode: str, mask_available: bool):
     else:
         return images_paths,
 
+def get_data_paths(cfg: DictConfig, mode: str, mask_available: bool):
+
+    if isinstance(cfg.DATASET[mode].IMAGES_PATH, str):
+
+        images_dir = resolve_path(
+            cfg.WORK_DIR,
+            cfg.DATASET[mode].IMAGES_PATH
+        )
+
+        images_names = os.listdir(images_dir)
+
+        images_paths = [
+            join_paths(images_dir, image_name)
+            for image_name in images_names
+        ]
+
+        if mask_available:
+            masks_dir = resolve_path(
+                cfg.WORK_DIR,
+                cfg.DATASET[mode].MASK_PATH
+            )
+
+            mask_paths = [
+                join_paths(
+                    masks_dir,
+                    image_to_mask_name(image_name)
+                )
+                for image_name in images_names
+            ]
+
+    else:
+        images_paths = list(cfg.DATASET[mode].IMAGES_PATH)
+
+        if mask_available:
+            mask_paths = list(cfg.DATASET[mode].MASK_PATH)
+
+    if mask_available:
+        return images_paths, mask_paths
+    else:
+        return images_paths,
 
 def suppress_warnings():
     """
