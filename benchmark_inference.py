@@ -56,7 +56,7 @@ def benchmark_time(cfg: DictConfig):
         f"Model weight's file does not exist at \n{checkpoint_path}"
 
     # load model weights
-    model.load_weights(checkpoint_path, by_name=True, skip_mismatch=True)
+    model.load_weights(checkpoint_path)
     # model.summary()
 
     time_taken = []
