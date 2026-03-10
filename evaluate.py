@@ -99,7 +99,6 @@ def evaluate(cfg: DictConfig):
     result = model.evaluate(
         x=val_generator,
         steps=validation_steps,
-        workers=cfg.DATALOADER_WORKERS,
         return_dict=True,
     )
 
