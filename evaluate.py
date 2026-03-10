@@ -84,7 +84,7 @@ def evaluate(cfg: DictConfig):
 
     # TODO: verify without augment it produces same results
     # load model weights
-    model.load_weights(checkpoint_path, by_name=True, skip_mismatch=True)
+    model.load_weights(checkpoint_path, skip_mismatch=True)
     model.summary()
 
     # data generators
