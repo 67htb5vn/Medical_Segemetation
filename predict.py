@@ -84,21 +84,10 @@ def predict(cfg: DictConfig):
             # if np.unique(mask).shape[0] == 2:
             mask_vis = denormalize_mask(mask, cfg.OUTPUT.CLASSES)
             pred_vis = denormalize_mask(prediction, cfg.OUTPUT.CLASSES)
-            
-            
-            # đảm bảo shape đúng cho hiển thị
+
             image = np.squeeze(image)
             mask_vis = np.squeeze(mask_vis)
             pred_vis = np.squeeze(pred_vis)
-
-            if image.ndim == 1:
-                image = image.reshape(cfg.INPUT.HEIGHT, cfg.INPUT.WIDTH)
-
-            if mask_vis.ndim == 1:
-                mask_vis = mask_vis.reshape(cfg.INPUT.HEIGHT, cfg.INPUT.WIDTH)
-
-            if pred_vis.ndim == 1:
-                pred_vis = pred_vis.reshape(cfg.INPUT.HEIGHT, cfg.INPUT.WIDTH)
 
             if mask_available:
                 display([image, mask_vis, pred_vis], show_true_mask=True)
