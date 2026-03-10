@@ -125,6 +125,8 @@ class DataGenerator(tf.keras.utils.Sequence):
                     self.cfg.PREPROCESS_DATA.NORMALIZE_MASK,
                 )
 
+                mask = (mask > 0).astype(np.int32)
+
             # numpy to tensorflow conversion
             if self.mask_available:
                 image, mask = tf.numpy_function(
