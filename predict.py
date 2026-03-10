@@ -68,9 +68,6 @@ def predict(cfg: DictConfig):
             prediction = batch_predictions[index]
             prediction = postprocess_mask(prediction, cfg.OUTPUT.CLASSES)
 
-            if prediction.shape[-1] > 1:
-                prediction = np.argmax(prediction, axis=-1)
-
             if mask_available:
                 mask = batch_mask[index]
                 if mask.shape[-1] > 1:
