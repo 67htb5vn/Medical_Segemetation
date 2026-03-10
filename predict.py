@@ -65,6 +65,7 @@ def predict(cfg: DictConfig):
                 image = image[:, :, 1]
 
             # do postprocessing on predicted mask
+            prediction = batch_predictions[index]
             prediction = postprocess_mask(prediction, cfg.OUTPUT.CLASSES)
 
             if prediction.shape[-1] > 1:
@@ -81,10 +82,12 @@ def predict(cfg: DictConfig):
             print("prediction unique:", np.unique(prediction))
             
             # if np.unique(mask).shape[0] == 2:
+            mask_vis = denormalize_mask(mask, cfg.OUTPUT.CLASSES)
+            pred_vis = denormalize_mask(prediction, cfg.OUTPUT.CLASSES)
             if mask_available:
-                display([image, mask, prediction], show_true_mask=True)
+                display([image, mask_vis, pred_vis], show_true_mask=True)
             else:
-                display([image, prediction], show_true_mask=False)
+                display([image,  pred_vis], show_true_mask=False)
 
             showed_images += 1
         # stop after displaying below number of images
