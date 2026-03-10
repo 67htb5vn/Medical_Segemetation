@@ -77,11 +77,7 @@ def evaluate(cfg: DictConfig):
     )
 
     # weights model path
-    checkpoint_path = join_paths(
-        cfg.WORK_DIR,
-        cfg.CALLBACKS.MODEL_CHECKPOINT.PATH,
-        f"{cfg.MODEL.WEIGHTS_FILE_NAME}.hdf5"
-    )
+    checkpoint_path = "/kaggle/input/datasets/nguyetanhmai/modelmec/unet3p/checkpoint/model_unet3plus.weights.h5"
 
     assert os.path.exists(checkpoint_path), \
         f"Model weight's file does not exist at \n{checkpoint_path}"
