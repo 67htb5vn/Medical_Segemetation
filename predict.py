@@ -65,14 +65,16 @@ def predict(cfg: DictConfig):
                 image = image[:, :, 1]
 
             # do postprocessing on predicted mask
-            prediction = batch_predictions[index]
             prediction = postprocess_mask(prediction, cfg.OUTPUT.CLASSES)
-            # denormalize mask for better visualization
-            prediction = denormalize_mask(prediction, cfg.OUTPUT.CLASSES)
+
+            if prediction.shape[-1] > 1:
+                prediction = np.argmax(prediction, axis=-1)
 
             if mask_available:
                 mask = batch_mask[index]
-                mask = denormalize_mask(mask, cfg.OUTPUT.CLASSES)
+                if mask.shape[-1] > 1:
+                   mask = np.argmax(mask, axis=-1)
+                
 
             print("image:", image.shape)
             print("mask unique:", np.unique(mask))
