@@ -4,6 +4,7 @@ Prediction script used to visualize model output
 import os
 import hydra
 from omegaconf import DictConfig
+import numpy as np
 
 from data_generators import tf_data_generator
 from utils.general_utils import join_paths, suppress_warnings
@@ -71,9 +72,12 @@ def predict(cfg: DictConfig):
 
             if mask_available:
                 mask = batch_mask[index]
-                mask = postprocess_mask(mask, cfg.OUTPUT.CLASSES)
                 mask = denormalize_mask(mask, cfg.OUTPUT.CLASSES)
 
+            print("image:", image.shape)
+            print("mask unique:", np.unique(mask))
+            print("prediction unique:", np.unique(prediction))
+            
             # if np.unique(mask).shape[0] == 2:
             if mask_available:
                 display([image, mask, prediction], show_true_mask=True)
