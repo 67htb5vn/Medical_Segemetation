@@ -36,7 +36,7 @@ def predict(cfg: DictConfig):
         f"Model weight's file does not exist at \n{checkpoint_path}"
 
     # load model weights
-    model.load_weights(checkpoint_path, by_name=True, skip_mismatch=True)
+    model.load_weights(checkpoint_path, skip_mismatch=True)
     # model.summary()
 
     # check mask are available or not
