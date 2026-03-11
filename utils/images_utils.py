@@ -5,6 +5,7 @@ import numpy as np
 import cv2
 from omegaconf import DictConfig
 import matplotlib.pyplot as plt
+import os
 
 
 def read_image(img_path, color_mode):
@@ -67,8 +68,12 @@ def image_to_mask_name(image_name: str):
     image_28_0.png         mask_28_0.png
     replace image with mask
     """
-
-    return image_name.replace('image', 'mask')
+    # #trường hợp masks và images cùng tên
+    # return image_name.replace('image', 'mask')
+    
+    #trường hợp khác tên
+    name = os.path.splitext(image_name)[0]
+    return name + ".png"
 
 
 def postprocess_mask(mask, classes, output_type=np.int32):
