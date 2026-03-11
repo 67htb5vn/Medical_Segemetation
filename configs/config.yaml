@@ -26,11 +26,11 @@ DATA_PREPARATION:
 DATASET:
   # paths should be relative from project root path
   TRAIN:
-    IMAGES_PATH: "/kaggle/input/datasets/nguyetanhmai/medicalgit1/medicalGit/train/images"
-    MASK_PATH: "/kaggle/input/datasets/nguyetanhmai/medicalgit1/medicalGit/train/mask"
+    IMAGES_PATH: "/kaggle/input/datasets/nguyetanhmai/medicalgit2/medicalGit2/train/images"
+    MASK_PATH: "/kaggle/input/datasets/nguyetanhmai/medicalgit2/medicalGit2/train/mask"
   VAL:
-    IMAGES_PATH: "/kaggle/input/datasets/nguyetanhmai/medicalgit1/medicalGit/val/images"
-    MASK_PATH: "/kaggle/input/datasets/nguyetanhmai/medicalgit1/medicalGit/val/mask"
+    IMAGES_PATH: "/kaggle/input/datasets/nguyetanhmai/medicalgit2/medicalGit2/val/images"
+    MASK_PATH: "/kaggle/input/datasets/nguyetanhmai/medicalgit2/medicalGit2/val/mask"
 
 
 MODEL:
